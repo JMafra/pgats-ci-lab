@@ -18,11 +18,11 @@ on:
 jobs:
   e2e-tests:
     # maquina que o job vai executar
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
 
     # condicional - if
     # `${ expressao}
-    
+
     if: ${{ github.event.workflow_run.conclusion == 'success'}}
 
     # passos do script de build
@@ -33,7 +33,7 @@ jobs:
       #instalacao do node
       - uses: actions/setup-node@v4
         with:
-          node-version: 22.x 
+          node-version: 22.x
 
       #instalacao do Yarn
       - name: Instalando Yarn
@@ -41,15 +41,15 @@ jobs:
 
       # instalacao das dependências
       - name: Instalando dependências
-        run: yarn 
+        run: yarn
 
       # instalacao do Playwright
       - name: Instalando Playwright
         run: yarn playwright install
 
       # executar os teste e2e
-      - name: Executando Testes E2E 
-        run: yarn run e2e 
+      - name: Executando Testes E2E
+        run: yarn run e2e
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
